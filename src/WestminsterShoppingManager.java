@@ -22,8 +22,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
     public void removeProduct(String productId) {
         for (Product product : this.products) {
             if (product.getProductId().equals(productId)) {
+                System.out.println("Details of the product to be removed:");
+                product.printProductDetails();
                 this.products.remove(product);
                 System.out.println("Product removed successfully!");
+                System.out.println("Total number of products left in the system: " + this.products.size());
                 return;
             }
         }
@@ -32,6 +35,7 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void printProductList() {
+        Collections.sort(this.products);
         for (Product product : this.products) {
             product.printProductDetails();
         }
