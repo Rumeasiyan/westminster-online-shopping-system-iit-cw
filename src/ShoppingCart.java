@@ -1,24 +1,45 @@
 import java.util.ArrayList;
 
 public class ShoppingCart {
-    private final ArrayList<Product> products;
+    private final ArrayList<Electronics> electronics;
+    private final ArrayList<Clothing> clothing;
 
-    public ShoppingCart(ArrayList<Product> products) {
-        this.products = products;
+    public ShoppingCart(ArrayList<Electronics> electronics, ArrayList<Clothing> clothing) {
+        this.electronics = electronics;
+        this.clothing = clothing;
     }
 
     public void addProduct(Product product) {
-        this.products.add(product);
+        if (product instanceof Electronics) {
+            this.electronics.add((Electronics) product);
+        } else if (product instanceof Clothing) {
+            this.clothing.add((Clothing) product);
+        }
     }
 
-    public void removeProduct(Product product) {
-        this.products.remove(product);
+    public void removeProduct(String productId) {
+        for (Electronics electronic : this.electronics) {
+            if (electronic.getProductId().equals(productId)) {
+                this.electronics.remove(electronic);
+                return;
+            }
+        }
+        for (Clothing cloth : this.clothing) {
+            if (cloth.getProductId().equals(productId)) {
+                this.clothing.remove(cloth);
+                return;
+            }
+        }
+        System.out.println("Product not found!");
     }
 
     public double calculateTotalPrice() {
         double totalPrice = 0;
-        for (Product product : this.products) {
-            totalPrice += product.getPrice();
+        for (Electronics electronic : this.electronics) {
+            totalPrice += electronic.getPrice();
+        }
+        for (Clothing cloth : this.clothing) {
+            totalPrice += cloth.getPrice();
         }
         return totalPrice;
     }

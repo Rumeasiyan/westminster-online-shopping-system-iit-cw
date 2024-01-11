@@ -3,12 +3,14 @@ import java.util.ArrayList;
 public class User {
     private String userName;
     private String password;
-    private ArrayList<Product> purchaseHistory;
+    private ArrayList<Electronics> purchaseHistoryElectronics;
+    private ArrayList<Clothing> purchaseHistoryClothing;
 
-    public User(String userName, String password, ArrayList<Product> purchaseHistory) {
+    public User(String userName, String password, ArrayList<Electronics> purchaseHistoryElectronics, ArrayList<Clothing> purchaseHistoryClothing) {
         this.userName = userName;
         this.password = password;
-        this.purchaseHistory = purchaseHistory;
+        this.purchaseHistoryElectronics = purchaseHistoryElectronics;
+        this.purchaseHistoryClothing = purchaseHistoryClothing;
     }
 
     public String getUserName() {
@@ -27,11 +29,19 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Product> getPurchaseHistory() {
-        return purchaseHistory;
+    public ArrayList<Electronics> getPurchaseHistoryElectronics() {
+        return purchaseHistoryElectronics;
     }
 
-    public void setPurchaseHistory(ArrayList<Product> purchaseHistory) {
-        this.purchaseHistory = purchaseHistory;
+    public void setPurchaseHistoryElectronics(ArrayList<Electronics> purchaseHistoryElectronics) {
+        this.purchaseHistoryElectronics = purchaseHistoryElectronics;
+    }
+
+    public ArrayList<Clothing> getPurchaseHistoryClothing() {
+        return purchaseHistoryClothing;
+    }
+
+    public void setPurchaseHistoryClothing(ArrayList<Clothing> purchaseHistoryClothing) {
+        this.purchaseHistoryClothing = purchaseHistoryClothing;
     }
 }
