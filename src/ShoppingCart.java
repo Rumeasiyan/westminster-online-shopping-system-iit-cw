@@ -1,32 +1,26 @@
 import java.util.ArrayList;
 
 public class ShoppingCart {
-    private final ArrayList<Electronics> electronics;
-    private final ArrayList<Clothing> clothing;
+    private final ArrayList<Product> products;
 
-    public ShoppingCart(ArrayList<Electronics> electronics, ArrayList<Clothing> clothing) {
-        this.electronics = electronics;
-        this.clothing = clothing;
+    public ShoppingCart(ArrayList<Product> products) {
+        this.products = products;
     }
 
     public void addProduct(Product product) {
-        if (product instanceof Electronics) {
-            this.electronics.add((Electronics) product);
-        } else if (product instanceof Clothing) {
-            this.clothing.add((Clothing) product);
+        if (this.products.size() < 10) {
+            this.products.add(product);
+            System.out.println("Product added successfully!");
+        } else {
+            System.out.println("Maximum limit is reached!");
         }
     }
 
     public void removeProduct(String productId) {
-        for (Electronics electronic : this.electronics) {
-            if (electronic.getProductId().equals(productId)) {
-                this.electronics.remove(electronic);
-                return;
-            }
-        }
-        for (Clothing cloth : this.clothing) {
-            if (cloth.getProductId().equals(productId)) {
-                this.clothing.remove(cloth);
+        for (Product product : this.products) {
+            if (product.getProductId().equals(productId)) {
+                this.products.remove(product);
+                System.out.println("Product removed successfully!");
                 return;
             }
         }
@@ -35,11 +29,8 @@ public class ShoppingCart {
 
     public double calculateTotalPrice() {
         double totalPrice = 0;
-        for (Electronics electronic : this.electronics) {
-            totalPrice += electronic.getPrice();
-        }
-        for (Clothing cloth : this.clothing) {
-            totalPrice += cloth.getPrice();
+        for (Product product : this.products) {
+            totalPrice += product.getPrice();
         }
         return totalPrice;
     }

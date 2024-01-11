@@ -1,38 +1,30 @@
 import java.util.ArrayList;
 
 public class WestminsterShoppingManager implements ShoppingManager{
-    private final ArrayList<Electronics> electronicsProducts;
-    private final ArrayList<Clothing> clothingProducts;
+    private final ArrayList<ArrayList<Product>> products;
 
-    public WestminsterShoppingManager(ArrayList<Electronics> electronicsProducts, ArrayList<Clothing> clothingProducts) {
-        this.electronicsProducts = electronicsProducts;
-        this.clothingProducts = clothingProducts;
+    public WestminsterShoppingManager(ArrayList<ArrayList<Product>> products) {
+        this.products = products;
     }
 
     @Override
     public void addProduct(Product product) {
-        if (product instanceof Electronics) {
-            if (this.electronicsProducts.size() < 50) {
-                this.electronicsProducts.add((Electronics) product);
+        if (this.products.size() < 50) {
+            if (product instanceof Electronics) {
+                this.products.get(0).add(product);
                 System.out.println("Product added successfully!");
-            } else {
-                System.out.println("Maximum limit is reached!");
+            } else if (product instanceof Clothing) {
+                this.products.get(1).add(product);
+                System.out.println("Product added successfully!");
             }
-        } else if (product instanceof Clothing) {
-            this.clothingProducts.add((Clothing) product);
+        } else {
+            System.out.println("Maximum limit is reached!");
         }
     }
 
     @Override
     public void removeProduct(String productId) {
-        for (Product product : this.products) {
-            if (product.getProductId().equals(productId)) {
-                this.products.remove(product);
-                System.out.println("Product removed successfully!");
-                return;
-            }
-        }
-        System.out.println("Product not found!");
+
     }
 
     @Override
