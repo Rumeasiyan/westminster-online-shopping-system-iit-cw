@@ -16,15 +16,9 @@ public class ShoppingCart {
         }
     }
 
-    public void removeProduct(String productId) {
-        for (Product product : this.products) {
-            if (product.getProductId().equals(productId)) {
-                this.products.remove(product);
-                System.out.println("Product removed successfully!");
-                return;
-            }
-        }
-        System.out.println("Product not found!");
+    public void removeProduct(Product product) {
+        this.products.remove(product);
+        System.out.println("Product removed successfully!");
     }
 
     public double calculateTotalPrice() {

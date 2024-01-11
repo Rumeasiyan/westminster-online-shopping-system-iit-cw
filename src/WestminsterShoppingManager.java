@@ -24,7 +24,16 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void removeProduct(String productId) {
-
+        for (ArrayList<Product> productArrayList : this.products) {
+            for (Product product : productArrayList) {
+                if (product.getProductId().equals(productId)) {
+                    productArrayList.remove(product);
+                    System.out.println("Product removed successfully!");
+                    return;
+                }
+            }
+        }
+        System.out.println("Product not found!");
     }
 
     @Override
