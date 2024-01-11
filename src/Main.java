@@ -55,7 +55,7 @@ public class Main {
     }
 
     private static void removeProduct(WestminsterShoppingManager westminsterShoppingManager, Scanner scanner) {
-        System.out.println("Enter product ID: ");
+        System.out.println("\nEnter product ID: ");
         String productId = scanner.next();
         westminsterShoppingManager.removeProduct(productId);
     }

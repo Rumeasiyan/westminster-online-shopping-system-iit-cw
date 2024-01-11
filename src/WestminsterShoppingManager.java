@@ -16,19 +16,25 @@ public class WestminsterShoppingManager implements ShoppingManager {
     }
 
     public void findTotalProducts() {
+        this.totalProducts = 0;
         for (Product product : this.products) {
             this.totalProducts += product.getNoOfAvailableItems();
         }
     }
 
+    public int getTotalProducts() {
+        findTotalProducts();
+        return totalProducts;
+    }
+
     @Override
     public void addProduct(Product product) {
         findTotalProducts();
-        if (this.totalProducts < 50) {
+        if (this.totalProducts + product.getNoOfAvailableItems() < 50) {
             this.products.add(product);
             System.out.println("Product added successfully!");
         } else {
-            System.out.println("Maximum limit is reached!");
+            System.out.println("Can't add the Product. Maximum limit is reached!");
         }
     }
 
@@ -41,7 +47,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
                 this.products.remove(product);
                 System.out.println("Product removed successfully!");
                 findTotalProducts();
-                System.out.println("Total number of products left in the system: " + this.totalProducts);
+                System.out.println("\nTotal number of products left in the system: " + this.totalProducts);
                 return;
             }
         }
@@ -50,6 +56,10 @@ public class WestminsterShoppingManager implements ShoppingManager {
 
     @Override
     public void printProductList() {
+        if (this.products.isEmpty()) {
+            System.out.println("\nNo products found!");
+            return;
+        }
         Collections.sort(this.products);
         for (Product product : this.products) {
             product.printProductDetails();
