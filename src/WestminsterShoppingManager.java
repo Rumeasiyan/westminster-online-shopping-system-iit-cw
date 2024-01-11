@@ -63,9 +63,11 @@ public class WestminsterShoppingManager implements ShoppingManager {
             FileOutputStream fileOutputStream = new FileOutputStream("products.txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-            for (Product product : this.products) {
-                objectOutputStream.writeObject(product);
-            }
+            objectOutputStream.writeObject(this.products);
+
+//            for (Product product : this.products) {
+//                objectOutputStream.writeObject(product);
+//            }
         } catch (IOException e) {
             System.out.println("Error occurred while saving the file!");
         }

@@ -9,7 +9,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Welcome to Westminster Shopping Manager!");
+            System.out.println("\nWelcome to Westminster Shopping Manager!");
             System.out.println("1. Add a new product");
             System.out.println("2. Delete a product");
             System.out.println("3. Print the list of products");
@@ -55,12 +55,14 @@ public class Main {
     }
 
     private static void removeProduct(WestminsterShoppingManager westminsterShoppingManager, Scanner scanner) {
-
+        System.out.println("Enter product ID: ");
+        String productId = scanner.next();
+        westminsterShoppingManager.removeProduct(productId);
     }
 
     private static void addProduct(WestminsterShoppingManager westminsterShoppingManager, Scanner scanner) {
         while (true) {
-            System.out.println("Select a product type:");
+            System.out.println("\nSelect a product type:");
             System.out.println("1. Electronics");
             System.out.println("2. Clothing");
             System.out.println("3. Exit");
@@ -82,13 +84,14 @@ public class Main {
                 case 3:
                     return;
             }
+            break;
         }
 
 
     }
 
     private static void addClothingProduct(WestminsterShoppingManager westminsterShoppingManager, Scanner scanner) {
-        System.out.println("Enter product ID: ");
+        System.out.println("\nEnter product ID: ");
         String productId = scanner.next();
         System.out.println("Enter product name: ");
         String productName = scanner.next();
@@ -152,7 +155,7 @@ public class Main {
     }
 
     private static void addElectronicsProduct(WestminsterShoppingManager westminsterShoppingManager, Scanner scanner) {
-        System.out.println("Enter product ID: ");
+        System.out.println("\nEnter product ID: ");
         String productId = scanner.next();
         System.out.println("Enter product name: ");
         String productName = scanner.next();

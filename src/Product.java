@@ -54,7 +54,7 @@ public abstract class Product implements Comparable<Product> {
     }
 
     public void printProductDetails() {
-        System.out.println("Product ID: " + this.productId);
+        System.out.println("\nProduct ID: " + this.productId);
         System.out.println("Product Name: " + this.productName);
         System.out.println("No of Available Items: " + this.noOfAvailableItems);
         System.out.println("Price: " + this.price);
