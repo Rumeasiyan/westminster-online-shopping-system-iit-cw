@@ -1,16 +1,30 @@
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
-public class WestminsterShoppingManager implements ShoppingManager{
+public class WestminsterShoppingManager implements ShoppingManager {
     private final ArrayList<Product> products;
+
+    private int totalProducts = 0;
+
+    public WestminsterShoppingManager() {
+        this.products = new ArrayList<>();
+    }
 
     public WestminsterShoppingManager(ArrayList<Product> products) {
         this.products = products;
     }
 
+    public void findTotalProducts() {
+        for (Product product : this.products) {
+            this.totalProducts += product.getNoOfAvailableItems();
+        }
+    }
+
     @Override
     public void addProduct(Product product) {
-        if (this.products.size() < 50) {
+        findTotalProducts();
+        if (this.totalProducts < 50) {
             this.products.add(product);
             System.out.println("Product added successfully!");
         } else {
@@ -26,7 +40,8 @@ public class WestminsterShoppingManager implements ShoppingManager{
                 product.printProductDetails();
                 this.products.remove(product);
                 System.out.println("Product removed successfully!");
-                System.out.println("Total number of products left in the system: " + this.products.size());
+                findTotalProducts();
+                System.out.println("Total number of products left in the system: " + this.totalProducts);
                 return;
             }
         }

@@ -2,7 +2,7 @@ public class Electronics extends Product {
     private String brand;
     private int warrantyPeriod;
 
-    public Electronics(String productId, String productName, int noOfAvailableItems, double price, String productType, String brand, int warrantyPeriod) {
+    public Electronics(String productId, String productName, int noOfAvailableItems, double price, String brand, int warrantyPeriod) {
         super(productId, productName, noOfAvailableItems, price, "Electronics");
         this.brand = brand;
         this.warrantyPeriod = warrantyPeriod;

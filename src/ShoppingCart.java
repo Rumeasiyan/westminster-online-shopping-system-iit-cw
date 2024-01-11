@@ -8,12 +8,8 @@ public class ShoppingCart {
     }
 
     public void addProduct(Product product) {
-        if (this.products.size() < 10) {
-            this.products.add(product);
-            System.out.println("Product added successfully!");
-        } else {
-            System.out.println("Maximum limit is reached!");
-        }
+        this.products.add(product);
+        System.out.println("Product added successfully!");
     }
 
     public void removeProduct(Product product) {
