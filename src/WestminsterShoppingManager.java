@@ -1,22 +1,18 @@
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 public class WestminsterShoppingManager implements ShoppingManager{
-    private final ArrayList<ArrayList<Product>> products;
+    private final ArrayList<Product> products;
 
-    public WestminsterShoppingManager(ArrayList<ArrayList<Product>> products) {
+    public WestminsterShoppingManager(ArrayList<Product> products) {
         this.products = products;
     }
 
     @Override
     public void addProduct(Product product) {
         if (this.products.size() < 50) {
-            if (product instanceof Electronics) {
-                this.products.get(0).add(product);
-                System.out.println("Product added successfully!");
-            } else if (product instanceof Clothing) {
-                this.products.get(1).add(product);
-                System.out.println("Product added successfully!");
-            }
+            this.products.add(product);
+            System.out.println("Product added successfully!");
         } else {
             System.out.println("Maximum limit is reached!");
         }
@@ -24,13 +20,11 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void removeProduct(String productId) {
-        for (ArrayList<Product> productArrayList : this.products) {
-            for (Product product : productArrayList) {
-                if (product.getProductId().equals(productId)) {
-                    productArrayList.remove(product);
-                    System.out.println("Product removed successfully!");
-                    return;
-                }
+        for (Product product : this.products) {
+            if (product.getProductId().equals(productId)) {
+                this.products.remove(product);
+                System.out.println("Product removed successfully!");
+                return;
             }
         }
         System.out.println("Product not found!");
@@ -38,16 +32,42 @@ public class WestminsterShoppingManager implements ShoppingManager{
 
     @Override
     public void printProductList() {
-
+        for (Product product : this.products) {
+            product.printProductDetails();
+        }
     }
 
+    //reference: https://attacomsian.com/blog/java-write-object-to-file
     @Override
     public void saveFile() {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream("products.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
+            for (Product product : this.products) {
+                objectOutputStream.writeObject(product);
+            }
+        } catch (IOException e) {
+            System.out.println("Error occurred while saving the file!");
+        }
     }
 
+    //reference: https://attacomsian.com/blog/java-read-object-from-file
+    //reference: https://stackoverflow.com/questions/20086784/java-how-to-read-file-into-arraylist-of-objects
     @Override
     public void loadFile() {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("products.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
+            ArrayList<Product> products1 = (ArrayList<Product>) objectInputStream.readObject();
+
+            products.clear();
+            products.addAll(products1);
+            System.out.println("File loaded successfully!");
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error occurred while loading the file!");
+        }
     }
 }

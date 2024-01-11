@@ -52,4 +52,12 @@ public abstract class Product {
     public void setProductType(String productType) {
         this.productType = productType;
     }
+
+    public void printProductDetails() {
+        System.out.println("Product ID: " + this.productId);
+        System.out.println("Product Name: " + this.productName);
+        System.out.println("No of Available Items: " + this.noOfAvailableItems);
+        System.out.println("Price: " + this.price);
+        System.out.println("Product Type: " + this.productType);
+    }
 }

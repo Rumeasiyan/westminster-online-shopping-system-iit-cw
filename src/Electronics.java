@@ -23,4 +23,11 @@ public class Electronics extends Product {
     public void setWarrantyPeriod(int warrantyPeriod) {
         this.warrantyPeriod = warrantyPeriod;
     }
+
+    @Override
+    public void printProductDetails() {
+        super.printProductDetails();
+        System.out.println("Brand: " + this.brand);
+        System.out.println("Warranty Period: " + this.warrantyPeriod);
+    }
 }

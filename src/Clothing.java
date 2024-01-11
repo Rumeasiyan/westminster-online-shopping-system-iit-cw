@@ -23,4 +23,11 @@ public class Clothing extends Product {
     public void setColor(String color) {
         this.color = color;
     }
+
+    @Override
+    public void printProductDetails() {
+        super.printProductDetails();
+        System.out.println("Size: " + this.size);
+        System.out.println("Color: " + this.color);
+    }
 }
