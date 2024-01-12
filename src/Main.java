@@ -52,6 +52,7 @@ public class Main {
     }
 
     private static void customerMenu() {
+        ClientPortal.runGui();
     }
 
     private static void removeProduct(WestminsterShoppingManager westminsterShoppingManager, Scanner scanner) {
