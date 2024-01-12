@@ -36,6 +36,18 @@ public class ClientPortal {
             panelThree.add(scrollPane);
             panelThree.revalidate();
             panelThree.repaint();
+
+            //reference: https://stackoverflow.com/questions/10128064/jtable-selected-row-click-event
+            table.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    int row = table.rowAtPoint(evt.getPoint());
+
+                    String productId = table.getValueAt(row, 0).toString();
+
+                    displayProductDetails(productId);
+                }
+            });
         });
 
         JButton button = new JButton("Shopping Cart");
