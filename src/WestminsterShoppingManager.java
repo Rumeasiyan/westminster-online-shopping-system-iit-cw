@@ -6,21 +6,21 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class WestminsterShoppingManager implements ShoppingManager {
-    private final ArrayList<Product> products;
+    private static ArrayList<Product> products;
 
     private int totalProducts = 0;
 
     public WestminsterShoppingManager() {
-        this.products = new ArrayList<>();
+        products = new ArrayList<>();
     }
 
     public WestminsterShoppingManager(ArrayList<Product> products) {
-        this.products = products;
+        WestminsterShoppingManager.products = products;
     }
 
     public void findTotalProducts() {
         this.totalProducts = 0;
-        for (Product product : this.products) {
+        for (Product product : products) {
             this.totalProducts += product.getNoOfAvailableItems();
         }
     }
@@ -34,20 +34,24 @@ public class WestminsterShoppingManager implements ShoppingManager {
     public void addProduct(Product product) {
         findTotalProducts();
         if (this.totalProducts + product.getNoOfAvailableItems() < 50) {
-            this.products.add(product);
+            products.add(product);
             System.out.println("Product added successfully!");
         } else {
             System.out.println("Can't add the Product. Maximum limit is reached!");
         }
     }
 
+    public static ArrayList<Product> getProducts() {
+        return products;
+    }
+
     @Override
     public void removeProduct(String productId) {
-        for (Product product : this.products) {
+        for (Product product : products) {
             if (product.getProductId().equals(productId)) {
                 System.out.println("Details of the product to be removed:");
                 product.printProductDetails();
-                this.products.remove(product);
+                products.remove(product);
                 System.out.println("Product removed successfully!");
                 findTotalProducts();
                 System.out.println("\nTotal number of products left in the system: " + this.totalProducts);
@@ -59,12 +63,12 @@ public class WestminsterShoppingManager implements ShoppingManager {
 
     @Override
     public void printProductList() {
-        if (this.products.isEmpty()) {
+        if (products.isEmpty()) {
             System.out.println("\nNo products found!");
             return;
         }
-        Collections.sort(this.products);
-        for (Product product : this.products) {
+        Collections.sort(products);
+        for (Product product : products) {
             product.printProductDetails();
         }
     }
@@ -76,7 +80,7 @@ public class WestminsterShoppingManager implements ShoppingManager {
             //clear the file
             fileWriter.write("");
 
-            for (Product product : this.products) {
+            for (Product product : products) {
                 String content = product.contentStoreFile();
                 fileWriter.write(String.valueOf(content) + System.lineSeparator());
             }

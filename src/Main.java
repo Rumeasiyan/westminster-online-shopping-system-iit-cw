@@ -52,7 +52,7 @@ public class Main {
     }
 
     private static void customerMenu() {
-        ClientPortal.runGui();
+        ClientPortal.main(null);
     }
 
     private static void removeProduct(WestminsterShoppingManager westminsterShoppingManager, Scanner scanner) {
