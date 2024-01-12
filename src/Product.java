@@ -1,4 +1,6 @@
-public abstract class Product implements Comparable<Product> {
+import java.io.Serializable;
+
+public abstract class Product implements Serializable,Comparable<Product> {
     private String productId;
     private String productName;
     private int noOfAvailableItems;
@@ -59,6 +61,10 @@ public abstract class Product implements Comparable<Product> {
         System.out.println("No of Available Items: " + this.noOfAvailableItems);
         System.out.println("Price: " + this.price);
         System.out.println("Product Type: " + this.productType);
+    }
+
+    public String contentStoreFile() {
+        return this.productId + "\n" + this.productName + "\n" + this.noOfAvailableItems + "\n" + this.price + "\n" + this.productType;
     }
 
     //reference: https://www.geeksforgeeks.org/how-to-sort-an-arraylist-of-objects-by-property-in-java/

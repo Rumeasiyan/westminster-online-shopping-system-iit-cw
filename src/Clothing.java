@@ -30,4 +30,9 @@ public class Clothing extends Product {
         System.out.println("Size: " + this.size);
         System.out.println("Color: " + this.color);
     }
+
+    @Override
+    public String contentStoreFile() {
+        return super.contentStoreFile() + "\n" + this.size + "\n" + this.color + "\n";
+    }
 }

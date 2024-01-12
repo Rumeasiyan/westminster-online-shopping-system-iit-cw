@@ -30,4 +30,9 @@ public class Electronics extends Product {
         System.out.println("Brand: " + this.brand);
         System.out.println("Warranty Period: " + this.warrantyPeriod);
     }
+
+    @Override
+    public String contentStoreFile() {
+        return super.contentStoreFile() + "\n" + this.brand + "\n" + this.warrantyPeriod + "\n";
+    }
 }

@@ -1,6 +1,9 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class WestminsterShoppingManager implements ShoppingManager {
     private final ArrayList<Product> products;
@@ -67,17 +70,22 @@ public class WestminsterShoppingManager implements ShoppingManager {
     }
 
     //reference: https://attacomsian.com/blog/java-write-object-to-file
+
     @Override
     public void saveFile() {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream("products.txt");
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            FileWriter fileWriter = new FileWriter("products.txt");
+            //clear the file
+            fileWriter.write("");
 
-            objectOutputStream.writeObject(this.products);
+            for (Product product : this.products) {
+                String content = product.contentStoreFile();
+                fileWriter.write(String.valueOf(content) + System.lineSeparator());
+            }
 
-//            for (Product product : this.products) {
-//                objectOutputStream.writeObject(product);
-//            }
+            fileWriter.close();
+
+            System.out.println("File saved successfully!");
         } catch (IOException e) {
             System.out.println("Error occurred while saving the file!");
         }
@@ -87,18 +95,43 @@ public class WestminsterShoppingManager implements ShoppingManager {
     //reference: https://stackoverflow.com/questions/20086784/java-how-to-read-file-into-arraylist-of-objects
     @Override
     public void loadFile() {
+        products.clear();
         try {
-            FileInputStream fileInputStream = new FileInputStream("products.txt");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            File file = new File("products.txt");
+            Scanner fileReader = new Scanner(file);
 
-            ArrayList<Product> products1 = (ArrayList<Product>) objectInputStream.readObject();
+            while (fileReader.hasNextLine()) {
+                String productId = fileReader.nextLine();
+                String productName = fileReader.nextLine();
+                String noOfAvailableItems = fileReader.nextLine();
+                String price = fileReader.nextLine();
+                String productType = fileReader.nextLine();
+                int noOfAvailableItemsInt = Integer.parseInt(noOfAvailableItems);
+                double priceDouble = Double.parseDouble(price);
 
-            products.clear();
-            products.addAll(products1);
-            System.out.println("File loaded successfully!");
+                if (productType.equals("Electronics")) {
+                    String brand = fileReader.nextLine();
+                    String warrantyPeriod = fileReader.nextLine();
+                    if (fileReader.hasNextLine()) {
+                        fileReader.nextLine();
+                    }
+                    int warrantyPeriodInt = Integer.parseInt(warrantyPeriod);
+                    addProduct(new Electronics(productId, productName, noOfAvailableItemsInt, priceDouble, brand, warrantyPeriodInt));
+                } else if (productType.equals("Clothing")) {
+                    String color = fileReader.nextLine();
+                    String size = fileReader.nextLine();
+                    if (fileReader.hasNextLine()) {
+                        fileReader.nextLine();
+                    }
+                    addProduct(new Clothing(productId, productName, noOfAvailableItemsInt, priceDouble, color, size));
+                }
+            }
 
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             System.out.println("Error occurred while loading the file!");
         }
+    }
+
+    private void addToList() {
     }
 }
