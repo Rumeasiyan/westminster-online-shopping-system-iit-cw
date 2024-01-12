@@ -116,6 +116,29 @@ public class ClientPortal {
         //row height
         table.setRowHeight(30);
 
+        //reference: https://stackoverflow.com/questions/10128064/jtable-selected-row-click-event
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = table.rowAtPoint(evt.getPoint());
+
+                String productId = table.getValueAt(row, 0).toString();
+                String productName = table.getValueAt(row, 1).toString();
+                String productPrice = table.getValueAt(row, 2).toString();
+                String productCategory = table.getValueAt(row, 3).toString();
+                String productInfo = table.getValueAt(row, 4).toString();
+
+                Product product = null;
+                if (productCategory.equals("Electronics")) {
+                    product = new Electronics(productId, productName, 1, Double.parseDouble(productPrice), productInfo.split(", ")[0], Integer.parseInt(productInfo.split(", ")[1].split(" ")[0]));
+                } else if (productCategory.equals("Clothing")) {
+                    product = new Clothing(productId, productName, 1, Double.parseDouble(productPrice), productInfo.split(", ")[1], productInfo.split(", ")[0]);
+                }
+
+                ShoppingCart.addProduct(product);
+            }
+        });
+
         return table;
     }
 }
