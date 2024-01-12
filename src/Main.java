@@ -5,10 +5,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         WestminsterShoppingManager westminsterShoppingManager = new WestminsterShoppingManager();
+
+        // Loads the contents of the file into the ArrayList
         westminsterShoppingManager.loadFile();
 
         Scanner scanner = new Scanner(System.in);
 
+        // The main menu
         while (true) {
             System.out.println("\nWelcome to Westminster Shopping Manager!");
             System.out.println("1. Add a new product");
@@ -53,6 +56,7 @@ public class Main {
     }
 
     private static void customerMenu() {
+        // retrieve the users from the class
         ArrayList<User> users = User.getUsers();
         System.out.println("\nAre you a registered customer?(Y/N)");
         Scanner scanner = new Scanner(System.in);
@@ -63,8 +67,7 @@ public class Main {
             System.out.println("Enter your password: ");
             String password = scanner.next();
 
-            User user = new User(username, password, new ArrayList<>());
-
+            // check if the user exists
             if (users != null) {
                 for (User user1 : users) {
                     if (user1.getUserName().equals(username) && user1.getPassword().equals(password)) {
@@ -83,6 +86,7 @@ public class Main {
             System.out.println("Enter your password: ");
             String password = scanner.next();
 
+            // creates a new user and adds it to the ArrayList
             User user = new User(username, password, new ArrayList<>());
             if (users == null) {
                 users = new ArrayList<>();

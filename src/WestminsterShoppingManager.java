@@ -131,7 +131,4 @@ public class WestminsterShoppingManager implements ShoppingManager {
             System.out.println("Error occurred while loading the file!");
         }
     }
-
-    private void addToList() {
-    }
 }
