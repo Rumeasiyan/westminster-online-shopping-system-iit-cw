@@ -69,8 +69,6 @@ public class WestminsterShoppingManager implements ShoppingManager {
         }
     }
 
-    //reference: https://attacomsian.com/blog/java-write-object-to-file
-
     @Override
     public void saveFile() {
         try {
@@ -91,8 +89,6 @@ public class WestminsterShoppingManager implements ShoppingManager {
         }
     }
 
-    //reference: https://attacomsian.com/blog/java-read-object-from-file
-    //reference: https://stackoverflow.com/questions/20086784/java-how-to-read-file-into-arraylist-of-objects
     @Override
     public void loadFile() {
         products.clear();
