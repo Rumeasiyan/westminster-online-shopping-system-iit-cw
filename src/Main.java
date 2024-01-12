@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -52,7 +53,45 @@ public class Main {
     }
 
     private static void customerMenu() {
-        ClientPortal.main(null);
+        ArrayList<User> users = User.getUsers();
+        System.out.println("\nAre you a registered customer?(Y/N)");
+        Scanner scanner = new Scanner(System.in);
+        String choice = scanner.next();
+        if (choice.equalsIgnoreCase("Y")) {
+            System.out.println("Enter your username: ");
+            String username = scanner.next();
+            System.out.println("Enter your password: ");
+            String password = scanner.next();
+
+            User user = new User(username, password, new ArrayList<>());
+
+            if (users != null) {
+                for (User user1 : users) {
+                    if (user1.getUserName().equals(username) && user1.getPassword().equals(password)) {
+                        System.out.println("Login successful!");
+                        ClientPortal.runGui(user1);
+                        return;
+                    }
+                }
+            }
+
+
+            System.out.println("Login failed!");
+        } else if (choice.equalsIgnoreCase("N")) {
+            System.out.println("Enter your username: ");
+            String username = scanner.next();
+            System.out.println("Enter your password: ");
+            String password = scanner.next();
+
+            User user = new User(username, password, new ArrayList<>());
+            if (users == null) {
+                users = new ArrayList<>();
+            }
+            users.add(user);
+            System.out.println("Registration successful!");
+            User.setUsers(users);
+            ClientPortal.runGui(user);
+        }
     }
 
     private static void removeProduct(WestminsterShoppingManager westminsterShoppingManager, Scanner scanner) {

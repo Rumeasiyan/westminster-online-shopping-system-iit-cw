@@ -1,16 +1,17 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
 public class User {
+
+    private static ArrayList<User> users;
     private String userName;
     private String password;
-    private ArrayList<Electronics> purchaseHistoryElectronics;
-    private ArrayList<Clothing> purchaseHistoryClothing;
+    private ArrayList<Product> purchaseHistory = new ArrayList<>();
 
-    public User(String userName, String password, ArrayList<Electronics> purchaseHistoryElectronics, ArrayList<Clothing> purchaseHistoryClothing) {
+    public User(String userName, String password, ArrayList<Product> purchaseHistory) {
         this.userName = userName;
         this.password = password;
-        this.purchaseHistoryElectronics = purchaseHistoryElectronics;
-        this.purchaseHistoryClothing = purchaseHistoryClothing;
+        this.purchaseHistory = purchaseHistory;
     }
 
     public String getUserName() {
@@ -29,19 +30,19 @@ public class User {
         this.password = password;
     }
 
-    public ArrayList<Electronics> getPurchaseHistoryElectronics() {
-        return purchaseHistoryElectronics;
+    public ArrayList<Product> getPurchaseHistory() {
+        return purchaseHistory;
     }
 
-    public void setPurchaseHistoryElectronics(ArrayList<Electronics> purchaseHistoryElectronics) {
-        this.purchaseHistoryElectronics = purchaseHistoryElectronics;
+    public void setPurchaseHistory(ArrayList<Product> purchaseHistory) {
+        this.purchaseHistory = purchaseHistory;
     }
 
-    public ArrayList<Clothing> getPurchaseHistoryClothing() {
-        return purchaseHistoryClothing;
+    public static ArrayList<User> getUsers() {
+        return users;
     }
 
-    public void setPurchaseHistoryClothing(ArrayList<Clothing> purchaseHistoryClothing) {
-        this.purchaseHistoryClothing = purchaseHistoryClothing;
+    public static void setUsers(ArrayList<User> users) {
+        User.users = users;
     }
 }
